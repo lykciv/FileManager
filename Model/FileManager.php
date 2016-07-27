@@ -89,6 +89,9 @@ class FileManager
     /** @var string */
     private $target_file_name = null;
 
+    /** @var bool */
+    private $keepOriginalFileExtension;
+
     /**
      * Constructor
      *
@@ -105,6 +108,7 @@ class FileManager
         $this->setUploadPath($parameters['upload_path']);
         $this->setUsagesClass($parameters['usage_class']);
         $this->setFullException($parameters['full_exception']);
+        $this->setKeepOriginalFileExtension($parameters['keep_original_extension']);
         $this->setThemeCss($parameters['theme']['css']);
         $this->setMagicFile($parameters['magic_file']);
         $this->setFilterImages($parameters['filter_images']);
@@ -762,5 +766,21 @@ class FileManager
     public function setTargetFileName($target_file_name)
     {
         $this->target_file_name = $target_file_name;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isKeepOriginalFileExtension()
+    {
+        return $this->keepOriginalFileExtension;
+    }
+
+    /**
+     * @param boolean $keepOriginalFileExtension
+     */
+    public function setKeepOriginalFileExtension($keepOriginalFileExtension)
+    {
+        $this->keepOriginalFileExtension = $keepOriginalFileExtension;
     }
 }

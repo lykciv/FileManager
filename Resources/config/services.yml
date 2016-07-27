@@ -2,8 +2,6 @@ services:
   youwe.file_manager.service:
     class: Youwe\FileManagerBundle\Services\FileManagerService
     arguments: ["@service_container"]
-    call:
-      - ["setKeepOriginalFileExtension", ["%youwe_file_manager.keep_original_extension%"]]
 
   youwe.file_manager.driver:
     class: Youwe\FileManagerBundle\Driver\FileManagerDriver
