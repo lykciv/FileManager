@@ -31,6 +31,9 @@ class FileManagerService
     /** @var FileManager */
     private $file_manager;
 
+    /** @var bool */
+    private $keepOriginalFileExtension = false;
+
     /**
      * Constructor
      *
@@ -57,6 +60,22 @@ class FileManagerService
     public function getFileManager()
     {
         return $this->file_manager;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isKeepOriginalFileExtension()
+    {
+        return $this->keepOriginalFileExtension;
+    }
+
+    /**
+     * @param boolean $keepOriginalFileExtension
+     */
+    public function setKeepOriginalFileExtension($keepOriginalFileExtension)
+    {
+        $this->keepOriginalFileExtension = $keepOriginalFileExtension;
     }
 
     /**
@@ -150,7 +169,12 @@ class FileManagerService
         
         /** @var UploadedFile $file */
         foreach ($files as $file) {
-            $extension = $file->guessExtension();
+            if ($this->isKeepOriginalFileExtension()) {
+                $extension = $file->getClientOriginalExtension();
+            } else {
+                $extension = $file->guessExtension();
+            }
+
             if (!$extension) {
                 $extension = 'bin';
             }
